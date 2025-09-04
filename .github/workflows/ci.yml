@@ -21,7 +21,7 @@ jobs:
       - name: Run unittests
         run: go test ./... -cover
 
-  formatting:
+  style:
     name: Style
     runs-on: ubuntu-latest
 
@@ -36,3 +36,12 @@ jobs:
 
       - name: Check number of formatted files
         run: test -z $(go fmt ./...)
+
+      - name: Set up staticcheck
+        uses: dominikh/staticcheck-action@v1
+        with:
+          version: "latest"
+      
+      - name: Check linting using staticcheck
+        run: test -z $(staticcheck ./...)
+      
