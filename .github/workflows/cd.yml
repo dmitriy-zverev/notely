@@ -38,8 +38,10 @@ jobs:
       - name: Build and push Docker image
         run: gcloud builds submit --tag europe-north1-docker.pkg.dev/notely-471115/notely-ar-repo/notely:latest .
 
-      - name: Run migrations
+      - name: Set up Goose
         uses: mscno/setup-goose@v1
+
+      - name: Run migrations
         run: ./scripts/migrateup.sh
       
       - name: Deploy to Cloud Run
